@@ -41,8 +41,7 @@
   }
 
   function getRndValue() {
-      constvar
-      val = Math.floor(Math.random() * 3);
+      var val = Math.floor(Math.random() * 3);
       switch(val) {
           case 0:
               return "";
@@ -81,8 +80,16 @@ class Table{
      }
    }
 
+    initTable() {
+    }
+
+}
+
+
 onload= function () {
+
   var container =   document.getElementById('container');
-    var table = new Table(container, 10, 15);
+    var table = new Table(container, 10, 15)
   table.buildTable();
+
 }
