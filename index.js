@@ -3,25 +3,30 @@
   function Cellule(value, id){
     this.balise= document.createElement("td");
     this.balise.style.color= 'black';
-    this.balise.style.border   = '1px double red';
-    this.balise.style.opacity=1;
-      this.balise.style.padding   = '10px';
+      this.balise.style.border = '1px double';
+      this.balise.style.opacity = (value === '') ? '0.4' : '1';
+      // this.balise.style.backgroundColor= (value!=="")?'':'black';
+      this.balise.style.padding = '10px';
     this.baliseText= document.createTextNode( value.toString() );
     this.balise.appendChild(this.baliseText);
     this.balise.setAttribute('id', id);
     this.balise.addEventListener("click", function (balise) {
-        var id = (balise.path[0].getAttribute('id') );
-        var td=  document.getElementById(id);
-
+        let id = (balise.path[0].getAttribute('id') );
+        let td = document.getElementById(id);
        if(td.textContent!=="" && !isNaN(td.textContent) ){
-           console.log( td.textContent );
            td.textContent= parseInt(td.textContent)+1;
           }
         else{
-           prompt("saisir:", td.textContent)
+           if (td.textContent === "") {
+               td.style.backgroundColor = 'black';
+               td.style.opacity = parseFloat(td.style.opacity) + 0.1;
+           }
+           else {
+               const txt = prompt("saisir:", td.textContent);
+               td.textContent = txt;
+           }
        }
 
-        td.style.opacity= parseInt(td.style.opacity)+1;
     } );
 
     //define getter and setter for Cellule object
@@ -34,11 +39,10 @@
 
     return this.balise;
   }
-  function changeBalise( ) {
-       console.log("1111");
-  }
+
   function getRndValue() {
-      var val=Math.floor(Math.random() * 3) ;
+      constvar
+      val = Math.floor(Math.random() * 3);
       switch(val) {
           case 0:
               return "";
@@ -47,7 +51,7 @@
               return "1"
               break;
           default:
-              return "un";
+              return "text";
       }
   }
 
@@ -59,9 +63,6 @@ class Table{
      this.nbRows=nbRows;
      this.nbColunn=nbColunn;
    }
-  changeContent(balise) {
-      console.log(balise);
-    }
    buildTable(){
      this.baliseTable= document.createElement("table");
      console.log(this.HTMLContainer);
@@ -74,22 +75,14 @@ class Table{
          var id = 'id'+i+'_'+j;
          var cellule= new Cellule(getRndValue(), id);
          console.log(cellule.balise );
-         //document.createElement("td");
-         //cellule.addEventListener("click", function () {  this.changeContent(cellule.balise.getAttribute()); } );
          row.appendChild(cellule);
        }
        this.baliseTable.appendChild(row);
      }
    }
-   initTable(){}
-
-}
-
 
 onload= function () {
-
   var container =   document.getElementById('container');
-  var table= new Table(container, 20,20)
+    var table = new Table(container, 10, 15);
   table.buildTable();
-
 }
