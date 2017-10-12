@@ -12,9 +12,14 @@
     this.balise.addEventListener("click", function (balise) {
         var id = (balise.path[0].getAttribute('id') );
         var td=  document.getElementById(id);
-       console.log( td.textContent );
 
-       if(td.textContent){}
+       if(td.textContent!=="" && !isNaN(td.textContent) ){
+           console.log( td.textContent );
+           td.textContent= parseInt(td.textContent)+1;
+          }
+        else{
+           prompt("saisir:", td.textContent)
+       }
 
         td.style.opacity= parseInt(td.style.opacity)+1;
     } );
