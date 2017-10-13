@@ -1,6 +1,6 @@
 
 
-  function Cellule(value, id){
+  function Cellulsssse(value, id){
     this.balise= document.createElement("td");
     this.balise.style.color= 'black';
       this.balise.style.border = '1px double';
@@ -40,21 +40,6 @@
     return this.balise;
   }
 
-  function getRndValue() {
-      var val = Math.floor(Math.random() * 3);
-      switch(val) {
-          case 0:
-              return "";
-              break;
-          case 1:
-              return "1"
-              break;
-          default:
-              return "text";
-      }
-  }
-
-
 
 class Table{
    constructor(HTMLContainer, nbRows, nbColunn) {
@@ -69,12 +54,8 @@ class Table{
      var row ;
      for (var i = 0; i < this.nbRows; i++) {
        row = document.createElement("tr");
-       //row.createAttribute("id", i);
        for (var j = 0; j < this.nbColunn; j++) {
-         var id = 'id'+i+'_'+j;
-         var cellule= new Cellule(getRndValue(), id);
-         console.log(cellule.balise );
-         row.appendChild(cellule);
+          var cel = getRndCellule(row);
        }
        this.baliseTable.appendChild(row);
      }
